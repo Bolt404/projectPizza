@@ -246,7 +246,7 @@ public class orderPizza {
 
     /**
      *Find ud af om brugeren indtaster en interger.
-     * @param input
+     * @param input scanner input.
      * @return number
      */
     public static int inPutInteger (Scanner input){
