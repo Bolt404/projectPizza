@@ -70,17 +70,11 @@ public class orderPizza {
             System.out.printf("%-3S%-25S%s%20s%n", "9", "- " + PIZZANAME[8], "-", "80,-");
             System.out.printf("%-3S%-25S%s%20s%n", "10", "- " + PIZZANAME[9], "-", "80,-");
 
-            System.out.printf("%s%S%n%n", YELLOW, "prices shown are for a regular size pizza.");
+            System.out.printf("%s%S%n", YELLOW, "prices shown are for a regular size pizza.");
             System.out.printf("%s", RESET);
 
             System.out.printf("%S%n", "Input number of desired pizza");
-            int number = inPutInteger(input);
-
-            while (number > 10 || number < 1) {
-                System.out.printf("%s%S%n", RED, "Please input a number between 1-10");
-                System.out.printf(RESET);
-                number = inPutInteger(input);
-            }
+            int number = inPutInteger(input, 1, 10);
 
             switch (number) {
                 case 1:
@@ -152,16 +146,10 @@ public class orderPizza {
             System.out.printf("%-3S%-25S%s%20s%n", "4", "-" + TOPPINGS[3], "-", "10,-");
             System.out.printf("%-3S%-25S%s%20s%n", "5", "-" + TOPPINGS[4], "-", "5,-");
             System.out.printf("%-3S%-25S%s%20s%n", "6", "-" + TOPPINGS[5], "-", "5,-");
-            System.out.printf("%s%n", RESET);
+            System.out.printf("%s", RESET);
 
             System.out.printf("%S%n", "Input number of desired topping. or press 0 to continue");
-            int number = inPutInteger(input);
-
-            while (number > 6 || number < 0) {
-                System.out.printf("%s%S%n%S%n", RED, "Please input a number between 1-10", "or press 0 to continue.");
-                System.out.printf(RESET);
-                number = inPutInteger(input);
-            }
+            int number = inPutInteger(input, 0, 6);
 
             switch (number) {
                 case 1:
@@ -202,16 +190,11 @@ public class orderPizza {
             System.out.printf("%s", GREEN);
             System.out.printf("%-3S%-25S%s%20s%n", "1", "- familie", "-", "+ 50%");
             System.out.printf("%-3S%-25S%s%20s%n", "2", "- regular", "-", "   0%");
-            System.out.printf("%-3S%-25S%s%20s%n", "3", "- child", "-", "- 10%");
-            System.out.printf("%s%n", RESET);
+            System.out.printf("%-3S%-25S%s%20s%n", "3", "- child", "-", "- 25%");
+            System.out.printf("%s", RESET);
 
-            int number = inPutInteger(input);
-
-            while (number > 6 || number < 0) {
-                System.out.printf("%s%S%n", RED, "Please input a number between 1-3");
-                System.out.printf(RESET);
-                number = inPutInteger(input);
-            }
+            System.out.printf("%S%n", "input number of desired size.");
+            int number = inPutInteger(input, 1, 3);
 
             switch (number) {
                 case 1:
@@ -235,30 +218,36 @@ public class orderPizza {
         } while (!hasSize);
 
 
-
         System.out.printf("%S%n", selectedSize);
         System.out.printf("%S%n", selectedTopping);
         System.out.printf("%S%n", selectedPizza);
         System.out.printf("%S%s%n", "current price: ", totalprice);
     }
 
-
-
     /**
-     *Find ud af om brugeren indtaster en interger.
-     * @param input scanner input.
-     * @return number
+     * Method til at finde en integer fra bruger input
+     * @param input scanner input
+     * @param min minimum value for 'sikkerheds check'
+     * @param max maximum value for 'sikkerheds check'
+     * @return integer inden for min og max range.
      */
-    public static int inPutInteger (Scanner input){
+    public static int inPutInteger(Scanner input, int min, int max) {
         String RED = "\u001B[31m";
         String RESET = "\u001B[0m";
-        while (!input.hasNextInt()) {
-            System.out.printf("%s%S%s", RED, "Invalid input. Please enter a number.", RESET);
-            input.next();
+
+        while (true) {
+            if (input.hasNextInt()) {
+                int number = input.nextInt();
+                input.nextLine();
+                if (number >= min && number <= max) {
+                    return number; // Godt input, return integer.
+                } else {
+                    System.out.printf("%s%S [%d, %d].%s%n", RED, "Invalid input. Please enter a number within the range", min, max, RESET);
+                }
+            } else {
+                System.out.printf("%s%S%s%n", RED, "Invalid input. Please enter a valid integer", RESET);
+                input.next();
+            }
         }
-        int number = input.nextInt();
-        input.nextLine();
-        return number;
     }
 }
-// int number1 = inPutInteger(input, "Enter the first number: ");
