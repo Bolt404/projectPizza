@@ -1,22 +1,37 @@
 import java.util.Scanner;
 
+/**
+ * orderPizza er et console program der lader brugeren "bestille" en pizza.
+ * Et mini-projekt for at gemmengå de lærte ting på studiet ind til videre.
+ * Jeg har først hardcoded det meste af projektet og er/var gået igang med at indføre methoder.
+ *
+ * Mulig mangler
+ * - Der kan kun bestilles en pizza af gangen.
+ * - Der kan ikke printets valget af toppings. Array af en slags?
+ *
+ */
 public class orderPizza {
     public static void main(String[] args) {
+        //Gør min scanner klar.
         Scanner input = new Scanner(System.in);
 
+        //Boolean flags klar.
         boolean hasPizzaOrder;
         boolean hasTopping;
         boolean hasSize;
 
+        //Variables klar.
         int pizzaPrice = 0;
         int toppingPrice = 0;
         double totalprice = 0;
         double sizePrice = 0;
 
+        //Strings klar.
         String selectedPizza = "None";
         String selectedTopping = "None";
         String selectedSize = "None";
 
+        //Arrays klar, med 'variant' navne.
         String[] PIZZANAME = {
                 "calzone traditional",
                 "pizza anders and",
@@ -45,17 +60,19 @@ public class orderPizza {
                 "kids"
         };
 
+        //Farver til brug i print.
         String RESET = "\u001B[0m";
         String RED = "\u001B[31m";
         String GREEN = "\u001B[32m";
         String YELLOW = "\u001B[33m";
 
+        //Velkommens besked.
         System.out.printf("%s%-30S%s%n", RED, "welcome to tommies pizzas!", RESET);
         System.out.printf("%s%-30S%s%n", YELLOW, "to order input your desired pizza number, then follow the onscreen instructions.", RESET);
 
         // loop til at finde bestilt Pizza
         do {
-            hasPizzaOrder = false;
+            hasPizzaOrder = false; //Mit flag bliver sat til false.
 
             System.out.printf("%-3S%-25S%s%21S%n", "no", "- pizza name", "-", "price");
             System.out.printf("%s", GREEN);
@@ -74,8 +91,9 @@ public class orderPizza {
             System.out.printf("%s", RESET);
 
             System.out.printf("%S%n", "Input number of desired pizza");
-            int number = inPutInteger(input, 1, 10);
+            int number = inPutInteger(input, 1, 10); // Min method til at finde valid Integer input.
 
+            //Switch til Pizza og pris.
             switch (number) {
                 case 1:
                     pizzaPrice = 80;
@@ -134,8 +152,8 @@ public class orderPizza {
 
         //Loop til Toppings.... Mangler - Gem til array? For at vide navn på toppings?
         do {
-            totalprice += toppingPrice;
-            hasTopping = false;
+            totalprice += toppingPrice; //Da vi skal køre den igen, og igen laver vi udregning i toppen.
+            hasTopping = false; //Flag til false.
 
             System.out.printf("%s%S%n%S%s%n", YELLOW, "want additional toppings for your pizza?", "select from the following list:", RESET);
             System.out.printf("%-3S%-25S%s%21S%n", "no", "- topping", "-", "price");
@@ -149,8 +167,9 @@ public class orderPizza {
             System.out.printf("%s", RESET);
 
             System.out.printf("%S%n", "Input number of desired topping. or press 0 to continue");
-            int number = inPutInteger(input, 0, 6);
+            int number = inPutInteger(input, 0, 6); //Method til valid integer igen.
 
+            //Switch til toppings.
             switch (number) {
                 case 1:
                     toppingPrice = 10;
@@ -177,13 +196,13 @@ public class orderPizza {
                     selectedTopping = TOPPINGS[5];
                     break;
                 default:
-                    hasTopping = true;
+                    hasTopping = true; //Vi er kun true hvis 0, bliver valgt.
             }
         } while (!hasTopping);
 
         //Loop til size.
         do{
-            hasSize = false;
+            hasSize = false; //Flag til false
 
             System.out.printf("%S%n%S%s%n", "the size of your pizza will reflect the price", "if you wish to change the size select from the following:", RESET);
             System.out.printf("%-3S%-25S%s%32S%n", "no", "- size", "-", "+/- regular price");
@@ -194,8 +213,9 @@ public class orderPizza {
             System.out.printf("%s", RESET);
 
             System.out.printf("%S%n", "input number of desired size.");
-            int number = inPutInteger(input, 1, 3);
+            int number = inPutInteger(input, 1, 3); //Method til valid integer
 
+            //Switch for size.
             switch (number) {
                 case 1:
                     hasSize = true;
@@ -218,10 +238,12 @@ public class orderPizza {
         } while (!hasSize);
 
 
-        System.out.printf("%S%n", selectedSize);
-        System.out.printf("%S%n", selectedTopping);
-        System.out.printf("%S%n", selectedPizza);
-        System.out.printf("%S%s%n", "current price: ", totalprice);
+        //Kvittering
+        System.out.printf("%S%S%n", "Selected pizza: ", selectedPizza);
+        System.out.printf("%S%S%n", "Selected toppings: ", selectedTopping);
+        System.out.printf("%S%S%n%n", "pizza size: ", selectedSize);
+
+        System.out.printf("%S%s%n", "current total: ", totalprice);
     }
 
     /**
@@ -245,7 +267,7 @@ public class orderPizza {
                     System.out.printf("%s%S [%d, %d].%s%n", RED, "Invalid input. Please enter a number within the range", min, max, RESET);
                 }
             } else {
-                System.out.printf("%s%S%s%n", RED, "Invalid input. Please enter a valid integer", RESET);
+                System.out.printf("%s%S [%d, %d].%s%n", RED, "Invalid input. Please enter a number within the range", min, max, RESET);
                 input.next();
             }
         }
