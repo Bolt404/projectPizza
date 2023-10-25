@@ -4,15 +4,18 @@ public class orderPizza {
     public static void main(String[] args) {
         Scanner input = new Scanner(System.in);
 
-        boolean hasOrder;
+        boolean hasPizzaOrder;
         boolean hasTopping;
+        boolean hasSize;
 
         int pizzaPrice = 0;
         int toppingPrice = 0;
-        int totalprice = 0;
+        double totalprice = 0;
+        double sizePrice = 0;
 
         String selectedPizza = "None";
-        String selectedToppings = "None";
+        String selectedTopping = "None";
+        String selectedSize = "None";
 
         String[] PIZZANAME = {
                 "calzone traditional",
@@ -36,6 +39,12 @@ public class orderPizza {
                 "chilli"
         };
 
+        String[] PIZZASIZE = {
+                "familie",
+                "regular",
+                "kids"
+        };
+
         String RESET = "\u001B[0m";
         String RED = "\u001B[31m";
         String GREEN = "\u001B[32m";
@@ -44,8 +53,9 @@ public class orderPizza {
         System.out.printf("%s%-30S%s%n", RED, "welcome to tommies pizzas!", RESET);
         System.out.printf("%s%-30S%s%n", YELLOW, "to order input your desired pizza number, then follow the onscreen instructions.", RESET);
 
+        // loop til at finde bestilt Pizza
         do {
-            hasOrder = false;
+            hasPizzaOrder = false;
 
             System.out.printf("%-3S%-25S%s%21S%n", "no", "- pizza name", "-", "price");
             System.out.printf("%s", GREEN);
@@ -76,57 +86,61 @@ public class orderPizza {
                 case 1:
                     pizzaPrice = 80;
                     selectedPizza = "No 1 - " + PIZZANAME[0];
-                    hasOrder = true;
+                    hasPizzaOrder = true;
                     break;
                 case 2:
                     pizzaPrice = 80;
                     selectedPizza = "No 2 - " + PIZZANAME[1];
-                    hasOrder = true;
+                    hasPizzaOrder = true;
                     break;
                 case 3:
                     pizzaPrice = 80;
                     selectedPizza = "No 3 - " + PIZZANAME[2];
-                    hasOrder = true;
+                    hasPizzaOrder = true;
                     break;
                 case 4:
                     pizzaPrice = 80;
                     selectedPizza = "No 4 - " + PIZZANAME[3];
-                    hasOrder = true;
+                    hasPizzaOrder = true;
                     break;
                 case 5:
                     pizzaPrice = 80;
                     selectedPizza = "No 5 - " + PIZZANAME[4];
-                    hasOrder = true;
+                    hasPizzaOrder = true;
                     break;
                 case 6:
                     pizzaPrice = 80;
                     selectedPizza = "No 6 - " + PIZZANAME[5];
-                    hasOrder = true;
+                    hasPizzaOrder = true;
                     break;
                 case 7:
                     pizzaPrice = 80;
                     selectedPizza = "No 7 - " + PIZZANAME[6];
-                    hasOrder = true;
+                    hasPizzaOrder = true;
                     break;
                 case 8:
                     pizzaPrice = 80;
                     selectedPizza = "No 8 - " + PIZZANAME[7];
-                    hasOrder = true;
+                    hasPizzaOrder = true;
                     break;
                 case 9:
                     pizzaPrice = 80;
                     selectedPizza = "No 9 - " + PIZZANAME[8];
-                    hasOrder = true;
+                    hasPizzaOrder = true;
                     break;
                 case 10:
                     pizzaPrice = 80;
                     selectedPizza = "No 10 - " + PIZZANAME[9];
-                    hasOrder = true;
+                    hasPizzaOrder = true;
                     break;
             }
-        } while (!hasOrder);
+        } while (!hasPizzaOrder);
 
+        totalprice += pizzaPrice;
+
+        //Loop til Toppings.... Mangler - Gem til array? For at vide navn på toppings?
         do {
+            totalprice += toppingPrice;
             hasTopping = false;
 
             System.out.printf("%s%S%n%S%s%n", YELLOW, "want additional toppings for your pizza?", "select from the following list:", RESET);
@@ -137,34 +151,99 @@ public class orderPizza {
             System.out.printf("%-3S%-25S%s%20s%n", "3", "-" + TOPPINGS[2], "-", "10,-");
             System.out.printf("%-3S%-25S%s%20s%n", "4", "-" + TOPPINGS[3], "-", "10,-");
             System.out.printf("%-3S%-25S%s%20s%n", "5", "-" + TOPPINGS[4], "-", "5,-");
-            System.out.printf("%-3S%-25S%s%20s%n", "5", "-" + TOPPINGS[5], "-", "5,-");
+            System.out.printf("%-3S%-25S%s%20s%n", "6", "-" + TOPPINGS[5], "-", "5,-");
             System.out.printf("%s%n", RESET);
+
+            System.out.printf("%S%n", "Input number of desired topping. or press 0 to continue");
             int number = inPutInteger(input);
 
-            while (number > 2 || number < 1) {
-                System.out.printf("%s%S%n", RED, "Please input a number between 1-10");
+            while (number > 6 || number < 0) {
+                System.out.printf("%s%S%n%S%n", RED, "Please input a number between 1-10", "or press 0 to continue.");
                 System.out.printf(RESET);
                 number = inPutInteger(input);
             }
 
             switch (number) {
                 case 1:
-                    pizzaPrice = 80;
-                    selectedPizza = "No 1 - " + PIZZANAME[0];
-                    hasOrder = true;
+                    toppingPrice = 10;
+                    selectedTopping = TOPPINGS[0];
                     break;
                 case 2:
-                    pizzaPrice = 80;
-                    selectedPizza = "No 2 - " + PIZZANAME[1];
-                    hasOrder = true;
+                    toppingPrice = 10;
+                    selectedTopping = TOPPINGS[1];
                     break;
+                case 3:
+                    toppingPrice = 10;
+                    selectedTopping = TOPPINGS[2];
+                    break;
+                case 4:
+                    toppingPrice = 10;
+                    selectedTopping = TOPPINGS[3];
+                    break;
+                case 5:
+                    toppingPrice = 5;
+                    selectedTopping = TOPPINGS[4];
+                    break;
+                case 6:
+                    toppingPrice = 5;
+                    selectedTopping = TOPPINGS[5];
+                    break;
+                default:
+                    hasTopping = true;
             }
         } while (!hasTopping);
 
+        //Loop til size.
+        do{
+            hasSize = false;
 
-            System.out.printf("%S%n", selectedPizza);
-            System.out.printf("%S%s%n", "current price: ", pizzaPrice);
+            System.out.printf("%S%n%S%s%n", "the size of your pizza will reflect the price", "if you wish to change the size select from the following:", RESET);
+            System.out.printf("%-3S%-25S%s%32S%n", "no", "- size", "-", "+/- regular price");
+            System.out.printf("%s", GREEN);
+            System.out.printf("%-3S%-25S%s%20s%n", "1", "- familie", "-", "+ 50%");
+            System.out.printf("%-3S%-25S%s%20s%n", "2", "- regular", "-", "   0%");
+            System.out.printf("%-3S%-25S%s%20s%n", "3", "- child", "-", "- 10%");
+            System.out.printf("%s%n", RESET);
+
+            int number = inPutInteger(input);
+
+            while (number > 6 || number < 0) {
+                System.out.printf("%s%S%n", RED, "Please input a number between 1-3");
+                System.out.printf(RESET);
+                number = inPutInteger(input);
+            }
+
+            switch (number) {
+                case 1:
+                    hasSize = true;
+                    sizePrice = 1.5;
+                    selectedSize = PIZZASIZE[0];
+                    break;
+                case 2:
+                    hasSize = true;
+                    selectedSize = PIZZASIZE[1];
+                    break;
+                case 3:
+                    hasSize = true;
+                    sizePrice = 0.75;
+                    selectedSize = PIZZASIZE[2];
+                    break;
+            }
+
+            totalprice = totalprice*sizePrice;
+
+        } while (!hasSize);
+
+
+
+        System.out.printf("%S%n", selectedSize);
+        System.out.printf("%S%n", selectedTopping);
+        System.out.printf("%S%n", selectedPizza);
+        System.out.printf("%S%s%n", "current price: ", totalprice);
     }
+
+
+
     /**
      *Find ud af om brugeren indtaster en interger.
      * @param input
@@ -182,26 +261,4 @@ public class orderPizza {
         return number;
     }
 }
-
-       /*
-        System.out.printf("%s%S%n%S%s%n", YELLOW, "want additional toppings for your pizza?", "select from the following list:", RESET);
-        System.out.printf("%-3S%-25S%s%21S%n", "no", "- topping", "-", "price");
-        System.out.printf("%s", GREEN);
-        System.out.printf("%-3S%-25S%s%20s%n", "1", "- cheese", "-", "10,-");
-        System.out.printf("%-3S%-25S%s%20s%n", "2", "- mushroom", "-", "10,-");
-        System.out.printf("%-3S%-25S%s%20s%n", "3", "- onion", "-", "10,-");
-        System.out.printf("%-3S%-25S%s%20s%n", "4", "- bacon", "-", "10,-");
-        System.out.printf("%-3S%-25S%s%20s%n", "5", "- garlic", "-", "5,-");
-        System.out.printf("%-3S%-25S%s%20s%n", "5", "- chilli", "-", "5,-");
-        System.out.printf("%s%n", RESET);
-
-        System.out.printf("%S%n%S%s%n", "the size of your pizza will reflect the price", "if you wish to change the size select from the following:", RESET);
-        System.out.printf("%-3S%-25S%s%32S%n", "no", "- size", "-", "+/- regular price");
-        System.out.printf("%s", GREEN);
-        System.out.printf("%-3S%-25S%s%20s%n", "1", "- familie", "-", "+ 50%");
-        System.out.printf("%-3S%-25S%s%20s%n", "2", "- child", "-", "- 10%");
-        System.out.printf("%s%n", RESET);
-        */
-
-
 // int number1 = inPutInteger(input, "Enter the first number: ");
