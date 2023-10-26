@@ -91,7 +91,7 @@ public class orderPizza {
             System.out.printf("%s", RESET);
 
             System.out.printf("%S%n", "Input number of desired pizza");
-            int number = inPutInteger(input, 1, 10); // Min method til at finde valid Integer input.
+            int number = checkInput(input, 1, 10); // Min method til at finde valid Integer input.
 
             //Switch til Pizza og pris.
             switch (number) {
@@ -167,7 +167,7 @@ public class orderPizza {
             System.out.printf("%s", RESET);
 
             System.out.printf("%S%n", "Input number of desired topping. or press 0 to continue");
-            int number = inPutInteger(input, 0, 6); //Method til valid integer igen.
+            int number = checkInput(input, 0, 6); //Method til valid integer igen.
 
             //Switch til toppings.
             switch (number) {
@@ -213,7 +213,7 @@ public class orderPizza {
             System.out.printf("%s", RESET);
 
             System.out.printf("%S%n", "input number of desired size.");
-            int number = inPutInteger(input, 1, 3); //Method til valid integer
+            int number = checkInput(input, 1, 3); //Method til valid integer
 
             //Switch for size.
             switch (number) {
@@ -253,7 +253,7 @@ public class orderPizza {
      * @param max maximum value for 'sikkerheds check'
      * @return integer inden for min og max range.
      */
-    public static int inPutInteger(Scanner input, int min, int max) {
+    public static int checkInput(Scanner input, int min, int max) {
         String RED = "\u001B[31m";
         String RESET = "\u001B[0m";
 
