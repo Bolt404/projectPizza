@@ -4,13 +4,15 @@ import java.util.Scanner;
  * orderPizza er et console program der lader brugeren "bestille" en pizza.
  * Et mini-projekt for at gemmengå de lærte ting på studiet ind til videre.
  * Jeg har først hardcoded det meste af projektet og er/var gået igang med at indføre methoder.
- *
  * Mulig mangler
- * - Der kan kun bestilles en pizza af gangen.
- * - Der kan ikke printets valget af toppings. Array af en slags?
- *
+ * - Der kan kun bestilles en pizza.
+ * - Kvittering er manglefuld.
+ * - Flere methoder
+ * Kørt af Elias
+ * Skrevet af Mads
  */
 public class orderPizza {
+    static int itest=0;
     public static void main(String[] args) {
         //Gør min scanner klar.
         Scanner input = new Scanner(System.in);
@@ -19,7 +21,6 @@ public class orderPizza {
         boolean hasPizzaOrder;
         boolean hasTopping;
         boolean hasSize;
-
         //Variables klar.
         int pizzaPrice = 0;
         int toppingPrice = 0;
@@ -66,7 +67,7 @@ public class orderPizza {
         String GREEN = "\u001B[32m";
         String YELLOW = "\u001B[33m";
 
-        //Velkommens besked.
+        //Velkomst besked.
         System.out.printf("%s%-30S%s%n", RED, "welcome to tommies pizzas!", RESET);
         System.out.printf("%s%-30S%s%n", YELLOW, "to order input your desired pizza number, then follow the onscreen instructions.", RESET);
 
@@ -150,7 +151,7 @@ public class orderPizza {
 
         totalprice += pizzaPrice;
 
-        //Loop til Toppings.... Mangler - Gem til array? For at vide navn på toppings?
+        //Loop til Toppings...
         do {
             totalprice += toppingPrice; //Da vi skal køre den igen, og igen laver vi udregning i toppen.
             hasTopping = false; //Flag til false.
