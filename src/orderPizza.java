@@ -12,7 +12,6 @@ import java.util.Scanner;
  * Skrevet af Mads
  */
 public class orderPizza {
-    static int itest=0;
     public static void main(String[] args) {
         //Gør min scanner klar.
         Scanner input = new Scanner(System.in);
